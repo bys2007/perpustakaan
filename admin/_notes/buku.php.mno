@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_Ruser" value="name:UserID;datatype:int,name:Username;datatype:string,name:Password;datatype:string,name:Email;datatype:string,name:NamaLengkap;datatype:string,name:Alamat;datatype:blob,name:Level;datatype:string" />
+	<infoitem key="UD_Rbuku" value="name:BukuID;datatype:int,name:KategoriID;datatype:int,name:Judul;datatype:string,name:Penulis;datatype:string,name:Penerbit;datatype:string,name:TahunTerbit;datatype:int" />
+	<infoitem key="UD_Rkategori" value="name:KategoriID;datatype:int,name:NamaKategori;datatype:string" />
+</info>

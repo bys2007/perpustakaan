@@ -1,0 +1,502 @@
+/* Variabel Warna & Font */
+:root {
+    --bg-color: #FFF8E7; /* Krem lembut */
+    --text-color: #4A4A4A; /* Abu-abu tua */
+    --primary-color: #FFB6C1; /* Pink pastel */
+    --secondary-color: #ADD8E6; /* Biru muda pastel */
+    --accent-color: #FFDAB9; /* Peach pastel */
+    --highlight-color: #6A5ACD; /* Ungu kalem */
+    --handwritten-font: 'Gaegu', cursive;
+}
+
+/* --- Keunikan #1: Mengubah Style Seleksi Teks --- */
+::selection {
+    background-color: var(--highlight-color);
+    color: var(--bg-color);
+}
+
+/* --- Keunikan #2: Scrollbar Kustom --- */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color);
+    border-radius: 20px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary-color);
+}
+
+/* Style Dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--handwritten-font);
+    font-size: 1.2rem;
+    line-height: 1.7;
+    /* --- Keunikan #3: Kursor Kustom (Menyembunyikan kursor asli) --- */
+    cursor: none;
+    overflow-x: hidden;
+}
+
+/* --- Implementasi Kursor Kustom --- */
+.cursor-dot,
+.cursor-outline {
+    pointer-events: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+body:hover .cursor-dot, body:hover .cursor-outline {
+    opacity: 1;
+}
+
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--highlight-color);
+}
+
+.cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--highlight-color);
+    transition: all 0.08s ease-out; /* Efek mengikuti yang lebih lambat */
+}
+
+/* Header & Hero Section */
+.hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.hero-text h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--highlight-color);
+}
+
+.hero-text p {
+    max-width: 500px;
+    margin: 1rem auto;
+}
+
+.hero-doodle svg {
+    /* --- Keunikan #4: Animasi Mengambang yang Kalem --- */
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Konten Utama */
+main {
+    padding: 2rem;
+    padding-bottom: 120px; /* Memberi ruang untuk navbar bawah */
+}
+
+.content-section {
+    max-width: 800px;
+    margin: 4rem auto;
+    text-align: center;
+    /* Efek muncul saat di-scroll */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.content-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.content-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--highlight-color);
+}
+
+/* Card Style */
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    width: 220px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px) rotate(2deg);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.card h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.form-buku {
+    margin: 2rem auto;
+    background: rgba(255, 255, 255, 0.5);
+    max-width: fit-content;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* Tombol (Call to Action) */
+.cta-button {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.cta-button:hover {
+    transform: scale(1.1);
+    background-color: var(--secondary-color);
+}
+
+/* --- IDE UTAMA: Navbar di Bawah --- */
+.bottom-nav {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    display: flex;
+    gap: 1.5rem;
+    z-index: 1000;
+}
+
+.bottom-nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.bottom-nav a:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.bottom-nav a.active {
+    background-color: var(--highlight-color);
+    color: white;
+}
+
+.input-button {
+    background-color: var(--highlight-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+      
+/* Footer Style: Konten kiri & kanan */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* --- Style untuk Modal Edit --- */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 2000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    /* overflow: auto; */
+    background-color: rgba(0,0,0,0.6); 
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: var(--bg-color);
+    bottom: 10vh;
+    margin: 15% auto; 
+    padding: 25px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 15px;
+    position: relative;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: scale(0.9);}
+    to {opacity: 1; transform: scale(1);}
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--text-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content h2 {
+    text-align: center;
+    color: var(--highlight-color);
+    margin-bottom: 1.5rem;
+}
+
+.modal-content table {
+    width: 100%;
+}
+.modal-content input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.modal-content input[type="submit"] {
+    background-color: var(--highlight-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.modal-content input[type="submit"]:hover {
+    background-color: var(--primary-color);
+}
+
+/* --- Style untuk Form dan Tabel di buku.php --- */
+.form-buku table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.form-buku td {
+    padding: 8px 12px;
+}
+.form-buku input[type="text"],
+.form-buku select,
+.form-buku textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--accent-color);
+    border-radius: 20px;
+    background-color: #fff;
+    font-family: var(--handwritten-font);
+    font-size: 1.1rem;
+    transition: border-color 0.3s;
+}
+.form-buku input[type="text"]:focus,
+.form-buku select:focus,
+.form-buku textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+.form-buku textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    border-radius: 15px;
+    overflow: hidden;
+}
+.data-table th,
+.data-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+.data-table thead {
+    background-color: var(--accent-color);
+    color: white;
+}
+.data-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+.data-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+.action-links a {
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 15px;
+    transition: background-color 0.3s, color 0.3s;
+}
+.edit-btn {
+    color: #6A5ACD;
+}
+.edit-btn:hover {
+    background-color: #6A5ACD;
+    color: white;
+}
+.delete-btn {
+    color: #E57373;
+}
+.delete-btn:hover {
+    background-color: #E57373;
+    color: white;
+}
+
+.two-column-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.two-column-layout .column {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+}
+
+.two-column-layout .column h3 {
+    color: var(--highlight-color);
+    margin-bottom: 1rem;
+}
+
+.pill {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    background-color: var(--accent-color);
+    color: #fff;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.pill.dipinjam {
+    background-color: var(--highlight-color);
+}
+
+.pill.dikembalikan {
+    background-color: #6FCF97;
+}
+
+.pill.terlambat {
+    background-color: #E57373;
+}
+
+.pill.diajukan {
+    background-color: var(--primary-color);
+}
+
+.alert {
+    margin-top: 1.2rem;
+    padding: 0.9rem 1.3rem;
+    border-radius: 20px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.alert-success {
+    background-color: #C6F6D5;
+    color: #22543D;
+}
+.alert-error {
+    background-color: #FED7D7;
+    color: #742A2A;
+}
+
+.inline-form {
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+.inline-form:last-child {
+    margin-right: 0;
+}
+
+.mini-button {
+    display: inline-block;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 14px;
+    background-color: var(--highlight-color);
+    color: #fff;
+    font-family: var(--handwritten-font);
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: opacity 0.3s, transform 0.2s;
+    text-decoration: none;
+}
+.mini-button:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+}
+.mini-button.alt {
+    background-color: var(--primary-color);
+}
+.mini-button.danger {
+    background-color: #E57373;
+}
+
+.filter-form table {
+    width: 100%;
+}
+.filter-form td {
+    padding: 0.5rem 0.75rem;
+    vertical-align: middle;
+}
